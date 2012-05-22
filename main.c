@@ -511,7 +511,13 @@ void resize(int w, int h) {
 		else
 			dim = w;
 
-		for (int i = 0; i < layerCount; glDeleteLists(layer[i].glList, 1), layer[i].glList = 0, layer[i++].flags = 0);
+    for (int i = 0; i < layerCount; i++) {
+      if(layer[i].glList) {
+        glDeleteLists(layer[i].glList, 1);
+        layer[i].glList = 0;
+      }
+      layer[i].flags = 0;
+    }
 
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
@@ -556,8 +562,10 @@ void drawLayer(int layerNum) {
 	snprintf(msgbuf, 256, "Layer %3d: %gmm", layerNum + 1, layer[layerNum].height);
 //	printf("Drawing layer %3d (%5.2f)\n", layerNum, layer[layerNum].height);
 	if ((currentLayer != layerNum) && (cache == false)) {
-		glDeleteLists(layer[currentLayer].glList, 1);
-		layer[currentLayer].glList = 0;
+    if(layer[currentLayer].glList) {
+      glDeleteLists(layer[currentLayer].glList, 1);
+		  layer[currentLayer].glList = 0;
+    }
 	}
 	currentLayer = layerNum;
 	render();
