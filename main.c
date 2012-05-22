@@ -1048,7 +1048,8 @@ int main(int argc, char* argv[]) {
 		transX = transY = 0.0;
 		zoomFactor = 1.0;
 
-		resize(600, 600);
+    // set the initial size of the window
+		resize(800, 800);
 	#else
 		viewPortL = viewPortT = 0.0;
 		viewPortR = viewPortB = 200.0;
