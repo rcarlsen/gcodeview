@@ -225,7 +225,7 @@ void dumpZstack() {
 	printf("Zstack has %d entries:\n", ZstackIndex);
 	for (int i = 0; i < ZstackIndex; i++) {
 		printf("Zstack %d:\n", i);
-		printf("\tstart: %d\n", Zstack[i].start - gcodefile);
+		printf("\tstart: %ld\n", Zstack[i].start - gcodefile);
 		printf("\tX: %g\n\tY: %g\n\tZ: %g\n", Zstack[i].X, Zstack[i].Y, Zstack[i].Z);
 	}
 }
@@ -365,6 +365,7 @@ void render_layer(int clayer, float alpha) {
 	float G = NAN, X = NAN, Y = NAN, E = NAN, Z = NAN, lastX = NAN, lastY = NAN, lastE = NAN;
 	uint32_t seen = 0;
 
+  // draw a grid:
 	for (X = 0; X < 201.0; X += 10.0) {
 		gline(X, 0, X, 200, ((((int) X) % 50) == 0)?1:0.2, 0, 0, 0, 16);
 		gline(0, X, 200, X, ((((int) X) % 50) == 0)?1:0.2, 0, 0, 0, 16);
@@ -679,7 +680,7 @@ void scanLine() {
 
 		if (0)
 		for (int i = 0; i < layerCount; i++) {
-			printf("Layer %d at %d+%d=%d\n", i, layer[i].index - gcodefile, layer[i].size, layer[i].index - gcodefile + layer[i].size);
+			printf("Layer %d at %ld+%d=%ld\n", i, layer[i].index - gcodefile, layer[i].size, layer[i].index - gcodefile + layer[i].size);
 			printf("\tHeight:   %g\n", layer[i].height);
 			printf("\tStarts at [%g,%g:%g]\n", layer[i].startX, layer[i].startY, layer[i].startE);
 			printf("\tEnds   at [%g,%g:%g]\n", layer[i].endX, layer[i].endY, layer[i].endE);
