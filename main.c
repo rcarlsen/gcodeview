@@ -865,6 +865,16 @@ void handle_keydown(SDL_KeyboardEvent key) {
 		case SDLK_RSHIFT:
 			keymodifiermask |= KMM_RSHIFT;
 			break;
+    case SDLK_UP:
+      // layer up 
+      if (currentLayer < layerCount - 1)
+				drawLayer(++currentLayer);
+      break;
+    case SDLK_DOWN:
+      // layer down 
+      if (currentLayer > 0)
+				drawLayer(--currentLayer);
+      break;
 		default:
 			printf("key %d pressed (%c)\n", key.keysym.sym, key.keysym.sym);
 			break;
