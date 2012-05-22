@@ -419,8 +419,11 @@ void render_layer(int clayer, float alpha) {
 					b = 64;
 					a = 160;
 				}
-				if ((lastX != X || lastY != Y) && !isnan(X) && !isnan(Y) && lastX <= 200.0)
-					gline(lastX, lastY, X, Y, extrusionWidth, r, g, b, a * alpha);
+				if ((lastX != X || lastY != Y) && !isnan(X) && !isnan(Y) && lastX <= 200.0) {
+          // center models in the grid:
+          float shiftX = 100, shiftY = 100;
+					gline(lastX + shiftX, lastY + shiftY, X + shiftX, Y + shiftY, extrusionWidth, r, g, b, a * alpha);
+        }
 			}
 			if (SEEN('X'))
 				lastX = X;
